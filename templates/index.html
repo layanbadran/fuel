@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>دورك عالكازية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;800&family=Amiri:wght@700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --olive: #4a5223;
+      --olive-d: #2e3315;
+      --olive-l: #8a9250;
+      --beige: #f2e9d3;
+      --beige-d: #e3d6b6;
+      --paper: #faf5e8;
+      --red: #9b3b2a
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: Tajawal, sans-serif;
+      background: var(--beige);
+      color: var(--olive-d);
+      line-height: 1.7
+    }
+
+    header {
+      background: var(--olive);
+      color: var(--beige);
+      padding: 2.2rem 1.5rem 3rem;
+      border-bottom: 6px solid var(--olive-l)
+    }
+
+    header h1 {
+      font-family: Amiri, serif;
+      font-size: 2.6rem;
+      margin: 0
+    }
+
+    header p {
+      margin: .3rem 0 0;
+      max-width: 46ch;
+      opacity: .9
+    }
+
+    main {
+      max-width: 1100px;
+      margin: -1.6rem auto 3rem;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 1.2rem
+    }
+
+    section {
+      background: var(--paper);
+      border: 1px solid var(--beige-d);
+      border-radius: 14px;
+      padding: 1.2rem 1.3rem
+    }
+
+    section.wide {
+      grid-column: 1/-1
+    }
+
+    h2 {
+      font-family: Amiri, serif;
+      margin: 0 0 .8rem;
+      font-size: 1.5rem;
+      color: var(--olive)
+    }
+
+    label {
+      display: block;
+      font-size: .9rem;
+      font-weight: 500;
+      margin: .6rem 0 .15rem
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: .55rem .7rem;
+      border: 1px solid var(--beige-d);
+      border-radius: 8px;
+      background: #fff;
+      font: inherit;
+      color: inherit
+    }
+
+    input:focus,
+    select:focus,
+    button:focus-visible {
+      outline: 3px solid var(--olive-l);
+      outline-offset: 1px
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem
+    }
+
+    .check {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      margin-top: .8rem;
+      padding: .6rem;
+      background: #f6e3dd;
+      border-radius: 8px;
+      color: var(--red);
+      font-weight: 500
+    }
+
+    .check input {
+      width: auto
+    }
+
+    button {
+      margin-top: 1rem;
+      width: 100%;
+      padding: .7rem;
+      border: 0;
+      border-radius: 8px;
+      background: var(--olive);
+      color: var(--beige);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    button:hover {
+      background: var(--olive-d)
+    }
+
+    .msg {
+      margin-top: .8rem;
+      padding: .7rem;
+      border-radius: 8px;
+      background: var(--beige);
+      white-space: pre-line
+    }
+
+    .msg.err {
+      background: #f6e3dd;
+      color: var(--red)
+    }
+
+    .station {
+      padding: .9rem 0;
+      border-bottom: 1px dashed var(--beige-d)
+    }
+
+    .station:last-child {
+      border: 0
+    }
+
+    .station b {
+      font-size: 1.1rem
+    }
+
+    .station small {
+      color: #6b6f4a
+    }
+
+    .gauge {
+      height: 14px;
+      background: var(--beige-d);
+      border-radius: 7px;
+      overflow: hidden;
+      margin: .4rem 0 .2rem
+    }
+
+    .gauge i {
+      display: block;
+      height: 100%;
+      background: linear-gradient(to left, var(--olive-l), var(--olive))
+    }
+
+    .gauge.low i {
+      background: var(--red)
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .92rem
+    }
+
+    th,
+    td {
+      text-align: right;
+      padding: .45rem .4rem;
+      border-bottom: 1px solid var(--beige-d)
+    }
+
+    .amb {
+      background: #f6e3dd;
+      color: var(--red);
+      padding: .05rem .5rem;
+      border-radius: 99px;
+      font-size: .8rem;
+      font-weight: 800
+    }
+
+    .chat {
+      display: flex;
+      gap: .5rem
+    }
+
+    .chat button {
+      width: auto;
+      margin: 0;
+      padding: .55rem 1.4rem
+    }
+
+    .src {
+      font-size: .8rem;
+      color: #6b6f4a;
+      margin-top: .4rem
+    }
+
+    details {
+      margin-top: .8rem
+    }
+
+    @media(max-width:800px) {
+      main {
+        grid-template-columns: 1fr
+      }
+
+      header h1 {
+        font-size: 2rem
+      }
+    }
+
+    .log {
+      height: 360px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      padding: .8rem;
+      background: var(--beige);
+      border-radius: 10px;
+      margin-bottom: .7rem
+    }
+
+    .b {
+      max-width: 82%;
+      padding: .55rem .85rem;
+      border-radius: 14px;
+      white-space: pre-line
+    }
+
+    .me {
+      align-self: flex-start;
+      background: var(--olive);
+      color: var(--beige);
+      border-end-start-radius: 4px
+    }
+
+    .bot {
+      align-self: flex-end;
+      background: #fff;
+      border: 1px solid var(--beige-d);
+      border-end-end-radius: 4px
+    }
+
+    .ghost {
+      width: auto;
+      margin: .6rem 0 0;
+      padding: .35rem .9rem;
+      background: transparent;
+      color: var(--olive);
+      border: 1px solid var(--olive-l);
+      font-weight: 500
+    }
+
+    .ghost:hover {
+      background: var(--beige-d)
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>دورك عالكازية</h1>
+    <p>سجّل سيارتك وكمية البنزين التي تحتاجها، ويحجز لك النظام الكازية والموعد المناسب بدون ازدحام. الإسعاف دائماً
+      أولاً.</p>
+  </header>
+  <main>
+    <section>
+      <h2>احجز دورك</h2>
+      <form id="vf">
+        <label>رقم السيارة</label><input name="plate" required placeholder="مثال: 12-34567">
+        <label>اسم صاحب السيارة</label><input name="owner" required>
+        <div class="row">
+          <div><label>نوع الوقود</label><select name="fuel">
+              <option>بنزين 95</option>
+              <option>بنزين 98</option>
+              <option>سولار</option>
+            </select></div>
+          <div><label>الكمية (لتر)</label><input name="liters" type="number" min="1" required></div>
+        </div>
+        <label class="check"><input type="checkbox" name="ambulance"> هذه سيارة إسعاف (أولوية)</label>
+        <button>احجز الآن</button>
+      </form>
+      <div id="vmsg"></div>
+    </section>
+
+    <section>
+      <h2>الكازيات والمخزون</h2>
+      <div id="stations"></div>
+      <details>
+        <summary>إضافة كازية</summary>
+        <form id="sf">
+          <label>اسم الكازية</label><input name="name" required>
+          <div class="row">
+            <div><label>المدينة</label><input name="city"></div>
+            <div><label>نوع الوقود</label><select name="fuel">
+                <option>بنزين 95</option>
+                <option>بنزين 98</option>
+                <option>سولار</option>
+              </select></div>
+            <div><label>الكمية المتوفرة (لتر)</label><input name="liters" type="number" min="0" required></div>
+            <div><label>تبدأ التعبئة</label><input name="opens" type="time" value="08:00"></div>
+          </div>
+          <button>حفظ الكازية</button>
+        </form>
+        <div id="smsg"></div>
+      </details>
+    </section>
+
+    <section class="wide">
+      <h2>الحجوزات حسب الأولوية</h2>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>رقم السيارة</th>
+              <th>الاسم</th>
+              <th>الكمية</th>
+              <th>الكازية</th>
+              <th>الموعد</th>
+            </tr>
+          </thead>
+          <tbody id="vehicles"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="wide">
+      <h2>اسأل المساعد</h2>
+      <div id="log" class="log" aria-live="polite">
+        <div class="b bot">أهلاً! اسألني عن الكازيات، المخزون، أو موعد حجزك.</div>
+      </div>
+      <form id="cf" class="chat"><input id="q" placeholder="مثال: وين أقرب كازية فيها بنزين 95؟"
+          autocomplete="off"><button>إرسال</button></form>
+      <button type="button" id="clr" class="ghost">محادثة جديدة</button>
+    </section>
+  </main>
+  <script>
+    const $ = s => document.querySelector(s);
+    const esc = t => String(t ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    const post = (u, b) => fetch(u, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(b) }).then(async r => ({ ok: r.ok, d: await r.json() }));
+    async function load() {
+      const s = await (await fetch("/api/state")).json();
+      $("#stations").innerHTML = s.stations.length ? s.stations.map(t => {
+        const p = t.liters ? Math.round(t.free / t.liters * 100) : 0;
+        return `<div class="station"><b>${esc(t.name)}</b> <small>${esc(t.city)} · ${esc(t.fuel)} · تبدأ ${esc(t.opens)}</small>
+      <div class="gauge ${p < 20 ? "low" : ""}"><i style="width:${p}%"></i></div>
+      <small>المتاح ${Math.round(t.free)} لتر من ${Math.round(t.liters)} (محجوز ${Math.round(t.reserved)})</small></div>`
+      }).join("")
+        : "<p>لا توجد كازيات بعد. أضف أول كازية من الأسفل.</p>";
+      $("#vehicles").innerHTML = s.vehicles.length ? s.vehicles.map(v => `<tr><td>${esc(v.plate)} ${v.kind === "ambulance" ? '<span class="amb">إسعاف</span>' : ""}</td>
+    <td>${esc(v.owner)}</td><td>${v.liters} لتر</td><td>${esc(v.station || "قائمة الانتظار")}</td><td>${esc(v.slot || "—")}</td></tr>`).join("")
+        : '<tr><td colspan="5">لا توجد حجوزات بعد.</td></tr>';
+    }
+    $("#vf").onsubmit = async e => {
+      e.preventDefault(); const f = Object.fromEntries(new FormData(e.target)); f.ambulance = e.target.ambulance.checked;
+      const { ok, d } = await post("/api/vehicles", f), m = $("#vmsg");
+      if (!ok) { m.className = "msg err"; m.textContent = d.error; return }
+      const v = d.vehicle; m.className = "msg";
+      m.textContent = v.station ? `تم الحجز.\nتعال إلى ${v.station} الساعة ${v.slot} لتعبئة ${v.liters} لتر.` : "لا يوجد مخزون كافٍ الآن. وضعناك في قائمة الانتظار وسيتم حجزك عند توفر الوقود.";
+      e.target.reset(); load()
+    };
+    $("#sf").onsubmit = async e => {
+      e.preventDefault(); const { ok, d } = await post("/api/stations", Object.fromEntries(new FormData(e.target)));
+      const m = $("#smsg"); m.className = ok ? "msg" : "msg err"; m.textContent = ok ? "تمت إضافة الكازية." : d.error; if (ok) { e.target.reset(); load() }
+    };
+    const hist = [];
+    function bubble(t, c, src) {
+      const d = document.createElement("div"); d.className = "b " + c; d.textContent = t;
+      if (src && src.length) { const s = document.createElement("details"); s.innerHTML = "<summary>المصادر</summary>"; const p = document.createElement("div"); p.className = "src"; p.textContent = src.join(" | "); s.append(p); d.append(s) }
+      $("#log").append(d); $("#log").scrollTop = 1e9; return d
+    }
+    $("#cf").onsubmit = async e => {
+      e.preventDefault(); const q = $("#q").value.trim(); if (!q) return; $("#q").value = "";
+      bubble(q, "me"); const w = bubble("يكتب...", "bot");
+      try {
+        const { d } = await post("/api/ask", { q, history: hist }); w.remove(); bubble(d.answer, "bot", d.sources);
+        hist.push({ role: "user", content: q }, { role: "assistant", content: d.answer })
+      }
+      catch { w.textContent = "تعذر الاتصال بالمساعد. حاول مرة ثانية." }
+    };
+    $("#clr").onclick = () => { hist.length = 0; $("#log").innerHTML = '<div class="b bot">بدأنا محادثة جديدة. كيف أساعدك؟</div>' };
+    load();
+  </script>
+</body>
+
+</html>
